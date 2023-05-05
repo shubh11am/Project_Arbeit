@@ -1,0 +1,118 @@
+I can use essrv3 and essrv4 as server;
+accessible from outside and essrv3.es.tuhh.de etc.
+
+One-time setup: Add the following line to the .bashrc_user file:
+export PFLAGS="--with-arch=rv32"
+Extension of the .modules.linux file with the following line:
++wcc
+
+`module list` can be used to show which programs are in the path
+are involved etc.
+
+hg clone /es_groups/wcc/hg/wcc-studi is the path to the general repo
+(Attention default branch is cloned)
+
+After cloning the repo, run `make -f Makefile.svn` in the repo
+autoconf prepared
+
+It makes sense to have a directory for all the auto-generated
+Build Makefiles etc. (e.g. `mkdir build`)
+
+To generate the makefiles, the following is used in the build directory
+command executed:
+../configure -C --enable-debug --enable-we-debugmacros
+--without-doxygen-doc
+
+Unfortunately there is an error in the build configuration so in the
+build/WCC/TESTBENCH directory then for RISCV the following
+command to execute:
+`../../../WCC/TESTBENCH/configure --with-arch=rv32`
+
+Then `make -j 20` can be executed in the build directory
+
+Listen branches: `hg branches`, switch to my branch: `hg up
+theinicke-riscv-datatypes`
+
+Under REPO/3RDPARTY/LIBIBERTY/ it may be necessary to add `hg revert .`
+to execute
+
+The test cases that are relevant to me can be found at:
+REPO/build/WCC/TESTBENCH/positive/int
+with `make` the shell scripts can be created and with make -j 20
+check can all be executed
+an endless loop is produced in one of the test cases; manual
+It is then necessary to shoot down the wcc
+
+The failed test cases are listed in the failed.log.
+The test cases can be called individually: for example `./intadd01.sh --verbose 3`
+
+For extended debug info when calling WCC, see
+REPO/DEBUGMACRO_CONF a codesel.conf file with the following content
+create:
+CodeSelector::RulesetActions
+
+WCC/wcc/main.cc is the main entry point of the WCC
+WCC/TESTBENCH contains the testcases positive and realword - realworld
+are real programs and positive attempts to cover ANSI-C Spec.
+The most interesting for me is:
+WCC/TESTBENCH/positive/int
+
+in the REPO changes potentially necessary for ICD-C WIR and CODESEL
+for ICD-C, ICD-C/ir is interesting
+
+WIR also includes hardware model - anything generic is under WIR/us too
+find
+WIR/arch then contains concrete processor-specific things
+
+For example, there is a 9-bit constant definition for the tricore at:
+WIR/arch/tricore/tcconst9signed.cc
+
+For RISC-V is located at WIR/arch/riscv/
+in the rvregvirtual.cc the definition for virtual registers
+rv32iopcodes.cc contains all opcodes that RISC-V has
+rv32ioperationformats.cc contains all possible formats for those
+Operations - like RRC9 for 2 registers and a 9-bit constant...
+The opcodes are linked to the OperationFormats in rv32i.cc
+
+In general, in the rules of the CodeSelector, I should never use the
+create the respective operations, but for this purpose the
+CODESEL/rv32/rv32instructionfactory.cc use - here should already for
+All RISC-V operations helper methods exist to perform operations
+to create
+if something is missing here, I can add it in a similar way
+
+The .m4 files in CODESEL/rv32 contain the actual rules -
+these are split over several files by preprocessor;
+ICD-CG only expects a single grammar file from which the
+Executable then generates c-files, which are compiled with gcc
+and are then the actual code selector - see yacc/lex
+
+rv32_rules.m4 includes the other grammar files...
+
+The target for the function pointer would be the test cases intfunpointcall01.c
+and so on to move through
+
+/es_home/theinicke/wcc-studi/build/WCC/wcc/wcc -mrudolv -v
+-I/es_home/theinicke/wcc-studi/WCC/TESTBENCH/lib/generic/ -O0 -mrudolv
+-O0 -Sv intadd01.c
+creates an assembler file with virtual registers for the specified
+Test - `-Sv` makes assembler file ("S") without
+register allocation ("v" is generated);
+to get an assembler file for the TriCode analogously (the
+double-occurring) -mrudolv are omitted
+
+The respective calls for GCC and WCC could match the output of
+`./intadd01.sh --verbose 3` (see above)
+
+Prof. Falk recommends having several tabs open - e.g. source code
+directory, testbench directory, source of the testbench directory, ...
+
+I need to implement: function pointers, BOOL, void, bit fields, C strings
+The structs are still missing for bit fields (who is currently doing it)
+and for C strings the arrays (one-dimensional arrays are just who
+your turn)
+Function pointers are covered by the test case files mentioned
+and the cast test cases are interesting for Bool and Void
+
+Remember!: When TestCase runs also check if the rest of the
+Suite still running!
