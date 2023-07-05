@@ -1,0 +1,11 @@
+include arch/tricore/optimizations/constfold/Makefile.src
+include arch/tricore/optimizations/constprop/Makefile.src
+include arch/tricore/optimizations/deadcode/Makefile.src
+include arch/tricore/optimizations/gcregallocation/Makefile.src
+include arch/tricore/optimizations/jumpcorrection/Makefile.src
+include arch/tricore/optimizations/operationbitwidths/Makefile.src
+include arch/tricore/optimizations/peephole/Makefile.src
+include arch/tricore/optimizations/predicatedexecution/Makefile.src
+include arch/tricore/optimizations/redundantcode/Makefile.src
+include arch/tricore/optimizations/scheduling/Makefile.src
+include arch/tricore/optimizations/siliconbugs/Makefile.src

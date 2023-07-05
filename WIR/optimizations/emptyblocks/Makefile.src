@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += optimizations/emptyblocks/wiremptyblocks.cc optimizations/emptyblocks/wiremptyblocks.h
+
+if !WITH_RESTRICTED_INSTALL
+  oeblincludedir	= ${includedir}/optimizations/emptyblocks
+
+  oeblinclude_HEADERS	= optimizations/emptyblocks/wiremptyblocks.h
+endif

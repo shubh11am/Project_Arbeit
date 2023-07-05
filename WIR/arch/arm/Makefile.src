@@ -1,0 +1,94 @@
+if BUILD_ARM
+libwir_la_SOURCES      += arch/arm/armaddressingmodes.cc \
+                          arch/arm/armbase.cc arch/arm/armbase.h \
+                          arch/arm/armconditions.cc \
+                          arch/arm/armconst3coprocessoropcode.cc arch/arm/armconst3coprocessoropcode.h \
+                          arch/arm/armconst3unsigned.cc arch/arm/armconst3unsigned.h \
+                          arch/arm/armconst4coprocessoropcode.cc arch/arm/armconst4coprocessoropcode.h \
+                          arch/arm/armconst5rotateamount.cc arch/arm/armconst5rotateamount.h \
+                          arch/arm/armconst5satpos.cc arch/arm/armconst5satpos.h \
+                          arch/arm/armconst5unsigned.cc arch/arm/armconst5unsigned.h \
+                          arch/arm/armconst5unsigned0.cc arch/arm/armconst5unsigned0.h \
+                          arch/arm/armconst6unsigned.cc arch/arm/armconst6unsigned.h \
+                          arch/arm/armconst6unsigned0.cc arch/arm/armconst6unsigned0.h \
+                          arch/arm/armconst7unsigned.cc arch/arm/armconst7unsigned.h \
+                          arch/arm/armconst8unsigned.cc arch/arm/armconst8unsigned.h \
+                          arch/arm/armconst9unsigned.cc arch/arm/armconst9unsigned.h \
+                          arch/arm/armconst10coprocessoroffset.cc arch/arm/armconst10coprocessoroffset.h \
+                          arch/arm/armconst12unsigned.cc arch/arm/armconst12unsigned.h \
+                          arch/arm/armconst16unsigned.cc arch/arm/armconst16unsigned.h \
+                          arch/arm/armconst24unsigned.cc arch/arm/armconst24unsigned.h \
+                          arch/arm/armhiregphysical.cc arch/arm/armhiregphysical.h \
+                          arch/arm/armhiregvirtual.cc arch/arm/armhiregvirtual.h \
+                          arch/arm/armio.cc arch/arm/armio.h \
+                          arch/arm/armloregphysical.cc arch/arm/armloregphysical.h \
+                          arch/arm/armloregvirtual.cc arch/arm/armloregvirtual.h \
+                          arch/arm/armopcodes.cc \
+                          arch/arm/armoperationformats.cc \
+                          arch/arm/armregistertypes.cc \
+                          arch/arm/armregphysical.cc arch/arm/armregphysical.h \
+                          arch/arm/armregvirtual.cc arch/arm/armregvirtual.h \
+                          arch/arm/armv4t.cc arch/arm/armv4t.h \
+                          arch/arm/armv4topcodes.cc \
+                          arch/arm/armv4toperationformats.cc \
+                          arch/arm/armv5t.cc arch/arm/armv5t.h \
+                          arch/arm/armv5topcodes.cc \
+                          arch/arm/armv5toperationformats.cc \
+                          arch/arm/armv5te.cc arch/arm/armv5te.h \
+                          arch/arm/armv5teopcodes.cc \
+                          arch/arm/armv5teoperationformats.cc \
+                          arch/arm/armv5tepregphysical.cc arch/arm/armv5tepregphysical.h \
+                          arch/arm/armv5tepregvirtual.cc arch/arm/armv5tepregvirtual.h \
+                          arch/arm/armv5teregistertypes.cc \
+                          arch/arm/armv5tej.cc arch/arm/armv5tej.h \
+                          arch/arm/armv5tejopcodes.cc \
+                          arch/arm/armv6.cc arch/arm/armv6.h \
+                          arch/arm/armv6opcodes.cc \
+                          arch/arm/armv6operationformats.cc
+
+if !WITH_RESTRICTED_INSTALL
+  ararmincludedir	= ${includedir}/arch/arm
+
+  ararminclude_HEADERS	= arch/arm/armbase.h \
+                          arch/arm/armconst3coprocessoropcode.h \
+                          arch/arm/armconst3unsigned.h \
+                          arch/arm/armconst4coprocessoropcode.h \
+                          arch/arm/armconst5rotateamount.h \
+                          arch/arm/armconst5satpos.h \
+                          arch/arm/armconst5unsigned.h \
+                          arch/arm/armconst5unsigned0.h \
+                          arch/arm/armconst6unsigned.h \
+                          arch/arm/armconst6unsigned0.h \
+                          arch/arm/armconst7unsigned.h \
+                          arch/arm/armconst8unsigned.h \
+                          arch/arm/armconst9unsigned.h \
+                          arch/arm/armconst10coprocessoroffset.h \
+                          arch/arm/armconst12unsigned.h \
+                          arch/arm/armconst16unsigned.h \
+                          arch/arm/armconst24unsigned.h \
+                          arch/arm/armhiregphysical.h \
+                          arch/arm/armhiregvirtual.h \
+                          arch/arm/armio.h \
+                          arch/arm/armloregphysical.h \
+                          arch/arm/armloregvirtual.h \
+                          arch/arm/armregphysical.h \
+                          arch/arm/armregvirtual.h \
+                          arch/arm/armv4t.h \
+                          arch/arm/armv5t.h \
+                          arch/arm/armv5te.h \
+                          arch/arm/armv5tepregphysical.h \
+                          arch/arm/armv5tepregvirtual.h \
+                          arch/arm/armv5tej.h \
+                          arch/arm/armv6.h
+endif
+
+ararmsysconfdir		= ${sysconfdir}/arm
+
+ararmsysconf_DATA       = arch/arm/arm7tdmi_1core.sys \
+                          arch/arm/arm7tdmi_2core.sys \
+                          arch/arm/arm7tdmi_4core.sys \
+                          arch/arm/arm7tdmi_8core.sys \
+                          arch/arm/lpc2880.sys \
+                          arch/arm/stm32f051.sys
+
+endif

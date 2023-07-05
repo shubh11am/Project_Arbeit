@@ -1,0 +1,53 @@
+#
+#
+#   This script belongs to the
+#
+#            Hamburg University of Technology (TUHH)
+#              WCC Intermediate Representation Framework
+#
+#   and is property of its respective copyright holder. It must neither be used
+#   nor published even in parts without explicit written permission.
+#
+#   Copyright 2015 - 2022, Heiko Falk.
+#
+#   Hamburg University of Technology (TUHH)
+#   Institute of Embedded Systems
+#   21071 Hamburg
+#   Germany
+#
+#   http://www.tuhh.de/es/esd/research/wcc
+#
+#
+
+
+###############################################################################
+#
+#  System specification of a simple, generic MIPS architecture.
+#  This file does not specify some real processor architecture but is solely
+#  used for demonstration purposes.
+#
+#  For details about the syntax and semantics of the directives in this file,
+#  please refer to the doxygen documentation of class WIR_SystemConfig.
+#
+
+#
+# Processor core (ISA TC1.3)
+#
+[CORE0]
+type               = core
+isa                = WIR generic
+clockfreq          = 150000000
+voltage            = 3.3
+
+
+#
+# One flat unified, uncached main memory
+#
+[RAM]
+type               = memory
+origin             = 0x0
+length             = 0x100000
+attributes         = RWXA       # read/write/execute/allocate
+cycles             = 1
+sections           = .text .init .eh_frame .ctors .dtors .traptab .inttab .rodata .data .bss
+hierarchy          = CORE0

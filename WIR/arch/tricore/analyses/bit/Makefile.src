@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += arch/tricore/analyses/bit/tcbitdfa.cc arch/tricore/analyses/bit/tcbitdfa.h
+
+if !WITH_RESTRICTED_INSTALL
+  atcbitincludedir	= ${includedir}/arch/tricore/analyses/bit
+
+  atcbitinclude_HEADERS	= arch/tricore/analyses/bit/tcbitdfa.h
+endif

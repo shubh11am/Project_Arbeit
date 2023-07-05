@@ -1,0 +1,76 @@
+if BUILD_TRICORE
+
+include arch/tricore/analyses/Makefile.src
+include arch/tricore/asmparser/Makefile.src
+include arch/tricore/optimizations/Makefile.src
+
+libwir_la_SOURCES      += arch/tricore/tc13.cc arch/tricore/tc13.h \
+                          arch/tricore/tc13addressingmodes.cc \
+                          arch/tricore/tc13opcodes.cc \
+                          arch/tricore/tc13operationformats.cc \
+                          arch/tricore/tc13registertypes.cc \
+                          arch/tricore/tc131.cc arch/tricore/tc131.h \
+                          arch/tricore/tc131opcodes.cc \
+                          arch/tricore/tcaregphysical.cc arch/tricore/tcaregphysical.h \
+                          arch/tricore/tcaregvirtual.cc arch/tricore/tcaregvirtual.h \
+                          arch/tricore/tcconst1unsigned.cc arch/tricore/tcconst1unsigned.h \
+                          arch/tricore/tcconst2unsigned.cc arch/tricore/tcconst2unsigned.h \
+                          arch/tricore/tcconst3unsigned.cc arch/tricore/tcconst3unsigned.h \
+                          arch/tricore/tcconst4signed.cc arch/tricore/tcconst4signed.h \
+                          arch/tricore/tcconst4unsigned.cc arch/tricore/tcconst4unsigned.h \
+                          arch/tricore/tcconst5unsigned.cc arch/tricore/tcconst5unsigned.h \
+                          arch/tricore/tcconst8unsigned.cc arch/tricore/tcconst8unsigned.h \
+                          arch/tricore/tcconst9signed.cc arch/tricore/tcconst9signed.h \
+                          arch/tricore/tcconst9unsigned.cc arch/tricore/tcconst9unsigned.h \
+                          arch/tricore/tcconst10signed.cc arch/tricore/tcconst10signed.h \
+                          arch/tricore/tcconst10unsigned.cc arch/tricore/tcconst10unsigned.h \
+                          arch/tricore/tcconst16signed.cc arch/tricore/tcconst16signed.h \
+                          arch/tricore/tcconst16unsigned.cc arch/tricore/tcconst16unsigned.h \
+                          arch/tricore/tcconst18unsigned.cc arch/tricore/tcconst18unsigned.h \
+                          arch/tricore/tcdregphysical.cc arch/tricore/tcdregphysical.h \
+                          arch/tricore/tcdregvirtual.cc arch/tricore/tcdregvirtual.h \
+                          arch/tricore/tceregphysical.cc arch/tricore/tceregphysical.h \
+                          arch/tricore/tceregvirtual.cc arch/tricore/tceregvirtual.h \
+                          arch/tricore/tcio.cc arch/tricore/tcio.h \
+                          arch/tricore/tcpregphysical.cc arch/tricore/tcpregphysical.h \
+                          arch/tricore/tcpregvirtual.cc arch/tricore/tcpregvirtual.h \
+                          arch/tricore/tcpswbitphysical.cc arch/tricore/tcpswbitphysical.h
+
+if !WITH_RESTRICTED_INSTALL
+  artcincludedir	= ${includedir}/arch/tricore
+
+  artcinclude_HEADERS	= arch/tricore/tc13.h \
+                          arch/tricore/tc131.h \
+                          arch/tricore/tcaregphysical.h \
+                          arch/tricore/tcaregvirtual.h \
+                          arch/tricore/tcconst1unsigned.h \
+                          arch/tricore/tcconst2unsigned.h \
+                          arch/tricore/tcconst3unsigned.h \
+                          arch/tricore/tcconst4signed.h \
+                          arch/tricore/tcconst4unsigned.h \
+                          arch/tricore/tcconst5unsigned.h \
+                          arch/tricore/tcconst8unsigned.h \
+                          arch/tricore/tcconst9signed.h \
+                          arch/tricore/tcconst9unsigned.h \
+                          arch/tricore/tcconst10signed.h \
+                          arch/tricore/tcconst10unsigned.h \
+                          arch/tricore/tcconst16signed.h \
+                          arch/tricore/tcconst16unsigned.h \
+                          arch/tricore/tcconst18unsigned.h \
+                          arch/tricore/tcdregphysical.h \
+                          arch/tricore/tcdregvirtual.h \
+                          arch/tricore/tceregphysical.h \
+                          arch/tricore/tceregvirtual.h \
+                          arch/tricore/tcio.h \
+                          arch/tricore/tcpregphysical.h \
+                          arch/tricore/tcpregvirtual.h \
+                          arch/tricore/tcpswbitphysical.h
+endif
+
+artcsysconfdir		= ${sysconfdir}/tricore
+
+artcsysconf_DATA	= arch/tricore/tc1796.sys \
+                          arch/tricore/tc1797.sys \
+                          arch/tricore/tc27x.sys
+
+endif

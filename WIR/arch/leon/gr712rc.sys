@@ -1,0 +1,88 @@
+#
+#
+#   This script belongs to the
+#
+#            Hamburg University of Technology (TUHH)
+#              WCC Intermediate Representation Framework
+#
+#   and is property of its respective copyright holder. It must neither be used
+#   nor published even in parts without explicit written permission.
+#
+#   Copyright 2015 - 2022, Heiko Falk.
+#
+#   Hamburg University of Technology (TUHH)
+#   Institute of Embedded Systems
+#   21071 Hamburg
+#   Germany
+#
+#   http://www.tuhh.de/es/esd/research/wcc
+#
+#
+
+
+###############################################################################
+#
+#  System specification of the Gaisler GR712RC Leon3 architecture.
+#
+#  Referring to gr712rc-usermanual.pdf (version 2.12)
+#
+#  For details about the syntax and semantics of the directives in this file,
+#  please refer to the doxygen documentation of class WIR_SystemConfig.
+#
+
+#
+# Gaisler GR712RC
+#
+[gr712rc]
+type               = system
+
+
+#
+# Processor core
+# (TODO: Specify corrrectly as soon as WIR ISA for LEON3 is available!)
+#
+[CORE0]
+type               = core
+isa                = TC1.3.1
+clockfreq          = 150000000
+voltage            = 1.5
+
+
+#
+# PROM -  readonly data
+#
+[PROM]
+type               = memory
+origin             = 0x01000000
+length             = 0x1000000  # 16MiB
+attributes         = R          # read
+cycles             = 1
+sections           = .rodata
+hierarchy          = CORE0
+
+
+#
+# SRAM
+#
+[SRAM]
+type               = memory
+origin             = 0x40000000
+length             = 0x800000   # 8MiB
+attributes         = RWA        # read/write/allocatable
+cycles             = 1
+sections           = .data .sbss .bss .sdata .zbss .zdata
+hierarchy          = CORE0
+
+
+#
+# SDRAM
+#
+[SDRAM-NC]
+type               = memory
+origin             = 0x60000000
+length             = 0x1000000  # 256MiB
+attributes         = RXA        # read/execute/allocate
+cycles             = 6
+memory_type        = SDRAM
+sections           = .text .init
+hierarchy          = CORE0

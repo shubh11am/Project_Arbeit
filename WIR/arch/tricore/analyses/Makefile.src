@@ -1,0 +1,1 @@
+include arch/tricore/analyses/bit/Makefile.src

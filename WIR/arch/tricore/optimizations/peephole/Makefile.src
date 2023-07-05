@@ -1,0 +1,13 @@
+libwir_la_SOURCES      += arch/tricore/optimizations/peephole/peep_extrst.cc arch/tricore/optimizations/peephole/peep_extrst.h \
+                          arch/tricore/optimizations/peephole/peep_ldextr.cc arch/tricore/optimizations/peephole/peep_ldextr.h \
+                          arch/tricore/optimizations/peephole/peep_ldst.cc arch/tricore/optimizations/peephole/peep_ldst.h \
+                          arch/tricore/optimizations/peephole/peep_preincr.cc arch/tricore/optimizations/peephole/peep_preincr.h
+
+if !WITH_RESTRICTED_INSTALL
+  otcphincludedir	= ${includedir}/arch/tricore/optimizations/peephole
+
+  otcphinclude_HEADERS	= arch/tricore/optimizations/peephole/peep_extrst.h \
+                          arch/tricore/optimizations/peephole/peep_ldextr.h \
+                          arch/tricore/optimizations/peephole/peep_ldst.h \
+                          arch/tricore/optimizations/peephole/peep_preincr.h
+endif

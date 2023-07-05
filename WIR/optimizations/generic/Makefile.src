@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += optimizations/generic/wiroptimization.cc optimizations/generic/wiroptimization.h
+
+if !WITH_RESTRICTED_INSTALL
+  ogenincludedir	= ${includedir}/optimizations/generic
+
+  ogeninclude_HEADERS	= optimizations/generic/wiroptimization.h
+endif

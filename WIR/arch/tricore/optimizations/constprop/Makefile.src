@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += arch/tricore/optimizations/constprop/tcconstprop.cc arch/tricore/optimizations/constprop/tcconstprop.h
+
+if !WITH_RESTRICTED_INSTALL
+  otccpincludedir	= ${includedir}/arch/tricore/optimizations/constprop
+
+  otccpinclude_HEADERS= arch/tricore/optimizations/constprop/tcconstprop.h
+endif

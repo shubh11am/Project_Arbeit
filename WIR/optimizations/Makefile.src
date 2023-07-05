@@ -1,0 +1,17 @@
+include optimizations/bitopt/Makefile.src
+include optimizations/constfold/Makefile.src
+include optimizations/constprop/Makefile.src
+include optimizations/deadcode/Makefile.src
+include optimizations/emptyblocks/Makefile.src
+include optimizations/gcregallocation/Makefile.src
+include optimizations/generic/Makefile.src
+include optimizations/jumpcorrection/Makefile.src
+include optimizations/loopinvariantcm/Makefile.src
+include optimizations/peephole/Makefile.src
+include optimizations/redundantblocks/Makefile.src
+include optimizations/redundantcode/Makefile.src
+include optimizations/scheduling/Makefile.src
+include optimizations/siliconbugs/Makefile.src
+include optimizations/unreachableblocks/Makefile.src
+include optimizations/unusedvregs/Makefile.src
+include optimizations/webs/Makefile.src

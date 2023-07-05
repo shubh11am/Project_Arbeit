@@ -1,0 +1,57 @@
+0. INTRODUCTION:
+================
+
+This directory contains all processor-independent WIR code optimizations.
+
+
+1. DIRECTORY STRUCTURE:
+=======================
+
+The current folder contains the following sub-folders:
+
+- bitopt: Contains a virtual base class for optimizations using bit-true data
+    and value flow analysis.
+
+- constfold: Contains a generic constant folding optimization using bit-true
+    data and value flow analysis.
+
+- constprop: Contains a generic constant propagation optimization using bit-true
+    data and value flow analysis.
+
+- deadcode: Contains a dead code elimination using bit-true data and value flow
+    analysis.
+
+- emptyblocks: Contains an optimization removing empty basic blocks from
+    functions.
+
+- gcregallocation: Contains a generic graph coloring-based register allocator.
+
+- generic: Contains a base class for generic WIR code optimizations.
+
+- jumpcorrection: Contains a base class for generic jump displacement
+    corrections.
+
+- loopinvariantcm: Contains a generic loop-invariant code motion optimization.
+
+- peephole: Contains a base class for generic peephole optimizations.
+
+- redundantblocks: Contains an optimization that merges two succeeding redundant
+    basic blocks from functions.
+
+- redundantcode: Contains an optimization that removes redundant code from
+    functions using bit-true data and value flow analysis.
+
+- scheduling: Contains a generic local instruction scheduler using list
+    scheduling.
+
+- siliconbugs: Contains a base class for code transformations to work around
+    silicon bugs.
+
+- unreachableblocks: Contains an optimization removing unreachable basic blocks
+    from functions.
+
+- unusedvregs: Contains an optimization removing unused virtual registers from
+    functions.
+
+- webs: Contains an optimization replacing occurrences of virtual registers by
+    webs.

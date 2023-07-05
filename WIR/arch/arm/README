@@ -1,0 +1,15 @@
+0. INTRODUCTION:
+================
+
+This directory contains all WIR components for the ARM processor architecture.
+
+
+1. DIRECTORY STRUCTURE:
+=======================
+
+The current folder contains the following sub-folders:
+
+- doc: Contains the official ARM documents for the abovementioned processor
+    architecture, including the ARM Architecture Reference Manual.
+
+- tests: Contains various ARM-specific test cases.

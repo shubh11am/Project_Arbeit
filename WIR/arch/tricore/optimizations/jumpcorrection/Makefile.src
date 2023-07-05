@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += arch/tricore/optimizations/jumpcorrection/tcjumpcorrection.cc arch/tricore/optimizations/jumpcorrection/tcjumpcorrection.h
+
+if !WITH_RESTRICTED_INSTALL
+  otcjmpcorrectincludedir	= ${includedir}/arch/tricore/optimizations/jumpcorrection
+
+  otcjmpcorrectinclude_HEADERS	= arch/tricore/optimizations/jumpcorrection/tcjumpcorrection.h
+endif

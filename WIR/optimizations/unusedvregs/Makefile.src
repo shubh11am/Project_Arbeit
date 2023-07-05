@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += optimizations/unusedvregs/wirunusedvregs.cc optimizations/unusedvregs/wirunusedvregs.h
+
+if !WITH_RESTRICTED_INSTALL
+  ouvregincludedir	= ${includedir}/optimizations/unusedvregs
+
+  ouvreginclude_HEADERS	= optimizations/unusedvregs/wirunusedvregs.h
+endif

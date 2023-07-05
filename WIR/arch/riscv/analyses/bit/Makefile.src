@@ -1,0 +1,7 @@
+libwir_la_SOURCES	       += arch/riscv/analyses/bit/rv32bitdfa.cc arch/riscv/analyses/bit/rv32bitdfa.h
+
+if !WITH_RESTRICTED_INSTALL
+  arv32bitincludedir		= ${includedir}/arch/riscv/analyses/bit
+
+  arv32bitinclude_HEADERS	= arch/riscv/analyses/bit/rv32bitdfa.h
+endif

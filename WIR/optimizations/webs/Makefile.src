@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += optimizations/webs/wirwebs.cc optimizations/webs/wirwebs.h
+
+if !WITH_RESTRICTED_INSTALL
+  owebincludedir	= ${includedir}/optimizations/webs
+
+  owebinclude_HEADERS	= optimizations/webs/wirwebs.h
+endif

@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += optimizations/redundantblocks/wirredundantblocks.cc optimizations/redundantblocks/wirredundantblocks.h
+
+if !WITH_RESTRICTED_INSTALL
+  orblincludedir	= ${includedir}/optimizations/redundantblocks
+
+  orblinclude_HEADERS	= optimizations/redundantblocks/wirredundantblocks.h
+endif

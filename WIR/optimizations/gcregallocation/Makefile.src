@@ -1,0 +1,13 @@
+libwir_la_SOURCES      += optimizations/gcregallocation/wirgraphcoloring.cc optimizations/gcregallocation/wirgraphcoloring.h \
+                          optimizations/gcregallocation/wirigraphedgeproperty.h \
+                          optimizations/gcregallocation/wirigraphnodeproperty.h \
+                          optimizations/gcregallocation/wirinterferencegraph.cc optimizations/gcregallocation/wirinterferencegraph.h
+
+if !WITH_RESTRICTED_INSTALL
+  ogcraincludedir	= ${includedir}/optimizations/gcregallocation
+
+  ogcrainclude_HEADERS	= optimizations/gcregallocation/wirgraphcoloring.h \
+                          optimizations/gcregallocation/wirigraphedgeproperty.h \
+                          optimizations/gcregallocation/wirigraphnodeproperty.h \
+                          optimizations/gcregallocation/wirinterferencegraph.h
+endif

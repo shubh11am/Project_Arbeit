@@ -1,0 +1,31 @@
+libwir_la_SOURCES      += analyses/structuralcontrolflow/wirbasicblocktreenode.cc analyses/structuralcontrolflow/wirbasicblocktreenode.h \
+			  analyses/structuralcontrolflow/wirblocktreenode.cc analyses/structuralcontrolflow/wirblocktreenode.h \
+			  analyses/structuralcontrolflow/wircontroltreenode.cc analyses/structuralcontrolflow/wircontroltreenode.h \
+			  analyses/structuralcontrolflow/wirhierarchicalcfg.cc analyses/structuralcontrolflow/wirhierarchicalcfg.h \
+			  analyses/structuralcontrolflow/wirifthenelsetreenode.cc analyses/structuralcontrolflow/wirifthenelsetreenode.h \
+			  analyses/structuralcontrolflow/wirifthentreenode.cc analyses/structuralcontrolflow/wirifthentreenode.h \
+			  analyses/structuralcontrolflow/wirimpropertreenode.cc analyses/structuralcontrolflow/wirimpropertreenode.h \
+			  analyses/structuralcontrolflow/wirpropertreenode.cc analyses/structuralcontrolflow/wirpropertreenode.h \
+			  analyses/structuralcontrolflow/wirnaturallooptreenode.cc analyses/structuralcontrolflow/wirnaturallooptreenode.h \
+			  analyses/structuralcontrolflow/wirselflooptreenode.cc analyses/structuralcontrolflow/wirselflooptreenode.h \
+			  analyses/structuralcontrolflow/wirstructuralanalysis.cc analyses/structuralcontrolflow/wirstructuralanalysis.h \
+			  analyses/structuralcontrolflow/wirswitchcasetreenode.cc analyses/structuralcontrolflow/wirswitchcasetreenode.h \
+			  analyses/structuralcontrolflow/wirwhilelooptreenode.cc analyses/structuralcontrolflow/wirwhilelooptreenode.h
+
+if !WITH_RESTRICTED_INSTALL
+  ascfincludedir	= ${includedir}/analyses/structuralcontrolflow
+
+  ascfinclude_HEADERS	= analyses/structuralcontrolflow/wirbasicblocktreenode.h \
+			  analyses/structuralcontrolflow/wirblocktreenode.h \
+			  analyses/structuralcontrolflow/wircontroltreenode.h \
+			  analyses/structuralcontrolflow/wirhierarchicalcfg.h \
+			  analyses/structuralcontrolflow/wirifthenelsetreenode.h \
+			  analyses/structuralcontrolflow/wirifthentreenode.h \
+			  analyses/structuralcontrolflow/wirimpropertreenode.h \
+			  analyses/structuralcontrolflow/wirpropertreenode.h \
+			  analyses/structuralcontrolflow/wirnaturallooptreenode.h \
+			  analyses/structuralcontrolflow/wirselflooptreenode.h \
+			  analyses/structuralcontrolflow/wirstructuralanalysis.h \
+			  analyses/structuralcontrolflow/wirswitchcasetreenode.h \
+			  analyses/structuralcontrolflow/wirwhilelooptreenode.h
+endif

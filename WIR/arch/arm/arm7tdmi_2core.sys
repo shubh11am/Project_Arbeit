@@ -1,0 +1,460 @@
+#
+#
+#   This script belongs to the
+#
+#            Hamburg University of Technology (TUHH)
+#              WCC Intermediate Representation Framework
+#
+#   and is property of its respective copyright holder. It must neither be used
+#   nor published even in parts without explicit written permission.
+#
+#   Copyright 2015 - 2022, Heiko Falk.
+#
+#   Hamburg University of Technology (TUHH)
+#   Institute of Embedded Systems
+#   21071 Hamburg
+#   Germany
+#
+#   http://www.tuhh.de/es/esd/research/wcc
+#
+#
+
+
+###############################################################################
+#
+#  System specification of the WCC ARM7 dual-core architecture.
+#
+#  For details about the syntax and semantics of the directives in this file,
+#  please refer to the doxygen documentation of class WIR_SystemConfig.
+#
+
+#
+# The memory layout is as follows:
+# (each region continues until the begin of the next one)
+#
+# 0x0000 0000  Global boot ROM (uncached), global interrupt handlers, 128MB
+# 0x0800 0000  Private boot ROM (uncached), 8MB per core
+# 0x2000 0000  Partitioned instruction RAM (uncached), 512KB per core
+# 0x2080 0000  Partitioned instruction RAM (cached in L1/L2 depending on setting), 512KB per core
+# 0x2800 0000  Private instruction Scratchpad (uncached), 512KB per Core
+# 0x3000 0000  Partitioned data RAM (uncached), 512KB per core
+# 0x3080 0000  Partitioned data RAM (cached in L1/L2 depending on setting), 512KB per core
+# 0x3800 0000  Private data Scratchpad (uncached), 512KB per Core
+# 0x4000 0000  Partitioned Flash (uncached), 2MB per core
+# 0x5000 0000  Global data area (for inter-core communication) 256MB
+# 0x8000 0000  Memory-mapped device registers
+#
+# With this setup, the system can feature up to 16 cores.
+#
+
+#
+# WCC ARM7-based multi-core
+#
+[arm7-2]
+type               = system
+
+
+#
+# Processor core 0 (ISA ARMv4T)
+#
+[CORE0]
+type               = core
+isa                = ARMv4T
+clockfreq          = 200000000
+voltage            = 3.3
+
+#
+# Processor core 1 (ISA ARMv4T)
+#
+[CORE1]
+type               = core
+isa                = ARMv4T
+clockfreq          = 200000000
+voltage            = 3.3
+
+
+###############################################################################
+#
+# Private per-core memories (L1)
+#
+
+#
+# Private per-core boot ROM
+# (Global boot ROM is not given here, since these are only the linker
+#  scripts for the individual cores)
+#
+[BOOT0]
+type               = memory
+origin             = 0x08000000
+length             = 0x800000   # 8MB
+attributes         = RX
+cycles             = 1
+clockratio         = 1:1
+sections           = .exception_vector .boot
+hierarchy          = CORE0
+
+[BOOT1]
+type               = memory
+origin             = 0x08000000
+length             = 0x800000   # 8MB
+attributes         = RX
+cycles             = 1
+clockratio         = 1:1
+sections           = .exception_vector .boot
+hierarchy          = CORE1
+
+
+#
+# Private per-core instruction scratchpad (uncached)
+#
+[I-SP0]
+type               = memory
+origin             = 0x28000000
+length             = 0x80000    # 512KB
+attributes         = RWXA
+clockratio         = 1:1
+cycles             = 1
+buswidth           = 4
+sections           = .text_spm
+hierarchy          = CORE0
+
+[I-SP1]
+type               = memory
+origin             = 0x28000000
+length             = 0x80000    # 512KB
+attributes         = RWXA
+clockratio         = 1:1
+cycles             = 1
+buswidth           = 4
+sections           = .text_spm
+hierarchy          = CORE1
+
+
+#
+# Private per-core data scratchpad (uncached)
+#
+[D-SP0]
+type               = memory
+origin             = 0x38000000
+length             = 0x40000    # 256KB
+attributes         = RWA
+clockratio         = 1:1
+cycles             = 1
+buswidth           = 4
+sections           = .data_spm
+hierarchy          = CORE0
+
+[D-SP1]
+type               = memory
+origin             = 0x38000000
+length             = 0x40000    # 256KB
+attributes         = RWA
+clockratio         = 1:1
+cycles             = 1
+buswidth           = 4
+sections           = .data_spm
+hierarchy          = CORE1
+
+
+#
+# Private per-core stack scratchpad (uncached)
+#
+[D-SP-STACK0]
+type               = memory
+origin             = 0x38040000
+length             = 0x40000    # 256KB
+attributes         = RWA
+clockratio         = 1:1
+cycles             = 1
+buswidth           = 4
+sections           = .stack
+hierarchy          = CORE0
+
+[D-SP-STACK1]
+type               = memory
+origin             = 0x38040000
+length             = 0x40000    # 256KB
+attributes         = RWA
+clockratio         = 1:1
+cycles             = 1
+buswidth           = 4
+sections           = .stack
+hierarchy          = CORE1
+
+
+#
+# Private per-core L1 instruction caches
+#
+[L1-I0]
+type               = cache
+cache_type         = I
+size               = 8192
+associativity      = 2
+linesize           = 32
+enabled            = 0
+shared             = 0
+writethrough       = 1
+writeallocate      = 1
+hitdelay           = 1
+missdelay          = 1
+buswidth           = 4
+
+[L1-I1]
+type               = cache
+cache_type         = I
+size               = 8192
+associativity      = 2
+linesize           = 32
+enabled            = 0
+shared             = 0
+writethrough       = 1
+writeallocate      = 1
+hitdelay           = 1
+missdelay          = 1
+buswidth           = 4
+
+
+#
+# Private per-core L1 data caches
+#
+[L1-D0]
+type               = cache
+cache_type         = D
+size               = 8192
+associativity      = 2
+linesize           = 32
+enabled            = 0
+shared             = 0
+writethrough       = 1
+writeallocate      = 1
+hitdelay           = 1
+missdelay          = 1
+buswidth           = 4
+
+[L1-D1]
+type               = cache
+cache_type         = D
+size               = 8192
+associativity      = 2
+linesize           = 32
+enabled            = 0
+shared             = 0
+writethrough       = 1
+writeallocate      = 1
+hitdelay           = 1
+missdelay          = 1
+buswidth           = 4
+
+
+###############################################################################
+#
+# Shared bus
+#
+
+#
+# TDMA-arbitrated shared bus
+#
+[BUS]
+type               = bus
+arbitration        = tdma
+arbitrationdelay   = 0
+slot               = CORE0 6
+slot               = CORE1 6
+
+# FP
+#priorities         = CORE1 CORE0
+
+# PD
+#arbitrationdelay   = 0
+#slot               = tdma CORE1 6
+#slot               = pd CORE0 42
+#slot               = fp 815
+##slot               = rr 4711
+
+
+###############################################################################
+#
+# Shared memories (L2)
+#
+
+#
+# Shared partitioned instruction RAM (uncached)
+#
+[I-SRAM-NC0]
+type               = memory
+origin             = 0x20000000
+length             = 0x80000    # 512KB
+attributes         = RWXA
+clockratio         = 1:1
+cycles             = 6
+buswidth           = 4
+sections           = .text_uncached .text
+hierarchy          = CORE0 BUS
+
+[I-SRAM-NC1]
+type               = memory
+origin             = 0x20080000
+length             = 0x80000    # 512KB
+attributes         = RWXA
+clockratio         = 1:1
+cycles             = 6
+buswidth           = 4
+sections           = .text_uncached .text
+hierarchy          = CORE1 BUS
+
+
+#
+# Shared partitioned data RAM (uncached)
+#
+[D-SRAM-NC0]
+type               = memory
+origin             = 0x30000000
+length             = 0x80000    # 512KB
+attributes         = RWA
+clockratio         = 1:1
+cycles             = 6
+buswidth           = 4
+sections           = .data .sbss .bss .sdata .zbss .zdata .rodata
+hierarchy          = CORE0 BUS
+
+[D-SRAM-NC1]
+type               = memory
+origin             = 0x30080000
+length             = 0x80000    # 512KB
+attributes         = RWA
+clockratio         = 1:1
+cycles             = 6
+buswidth           = 4
+sections           = .data .sbss .bss .sdata .zbss .zdata .rodata
+hierarchy          = CORE1 BUS
+
+
+#
+# Shared partitioned Flash (uncached)
+#
+[FLASH-NC0]
+type               = memory
+origin             = 0x40000000
+length             = 0x200000   # 2MB
+attributes         = RWA
+clockratio         = 1:1
+cycles             = 3
+buswidth           = 4
+sections           =
+hierarchy          = CORE0 BUS
+
+[FLASH-NC1]
+type               = memory
+origin             = 0x40200000
+length             = 0x200000   # 2MB
+attributes         = RWA
+clockratio         = 1:1
+cycles             = 3
+buswidth           = 4
+sections           =
+hierarchy          = CORE1 BUS
+
+
+#
+# Shared caches
+#
+[L2-I]
+type               = cache
+cache_type         = I
+size               = 32768
+associativity      = 4
+linesize           = 64
+enabled            = 0
+shared             = 1
+writethrough       = 1
+writeallocate      = 1
+hitdelay           = 1
+missdelay          = 2
+buswidth           = 4
+
+[L2-D]
+type               = cache
+cache_type         = D
+size               = 32768
+associativity      = 4
+linesize           = 64
+enabled            = 0
+shared             = 1
+writethrough       = 1
+writeallocate      = 1
+hitdelay           = 1
+missdelay          = 2
+buswidth           = 4
+
+
+#
+# Shared partitioned instruction RAM (cached in L1/L2, depending on cache
+# settings above)
+#
+[I-SRAM-C0]
+type               = memory
+origin             = 0x20800000
+length             = 0x80000    # 512KB
+attributes         = RWXAC
+clockratio         = 1:1
+cycles             = 3
+buswidth           = 4
+sections           = .text_cached
+hierarchy          = CORE0 L1-I0 BUS L2-I
+
+[I-SRAM-C1]
+type               = memory
+origin             = 0x20880000
+length             = 0x80000    # 512KB
+attributes         = RWXAC
+clockratio         = 1:1
+cycles             = 3
+buswidth           = 4
+sections           = .text_cached
+hierarchy          = CORE1 L1-I1 BUS L2-I
+
+
+#
+# Shared partitioned data RAM (cached in L1/L2, depending on cache settings
+# above)
+#
+[D-SRAM-C0]
+type               = memory
+origin             = 0x30800000
+length             = 0x80000    # 512KB
+attributes         = RWAC
+clockratio         = 1:1
+cycles             = 3
+buswidth           = 4
+sections           = .data_cached
+hierarchy          = CORE0 L1-D0 BUS L2-D
+
+[D-SRAM-C1]
+type               = memory
+origin             = 0x30880000
+length             = 0x80000    # 512KB
+attributes         = RWAC
+clockratio         = 1:1
+cycles             = 3
+buswidth           = 4
+sections           = .data_cached
+hierarchy          = CORE1 L1-D1 BUS L2-D
+
+
+#
+# Global data area (for inter-core communication)
+#
+# Nothing may be allocated here, since otherwise it would overlap.
+# Memory from here may only be allocated dynamically by the cores.
+#
+[GLOBAL_DATA]
+type               = memory
+origin             = 0x50000000
+length             = 0x10000000 # 256MB
+attributes         = RW
+clockratio         = 1:1
+cycles             = 3
+buswidth           = 4
+sections           = .scheduler_shared
+hierarchy          = CORE0 BUS
+hierarchy          = CORE1 BUS

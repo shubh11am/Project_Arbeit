@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += analyses/reachingdefinitions/wirreachingdefinitionsanalysis.cc analyses/reachingdefinitions/wirreachingdefinitionsanalysis.h
+
+if !WITH_RESTRICTED_INSTALL
+  ardefincludedir	= ${includedir}/analyses/reachingdefinitions
+
+  ardefinclude_HEADERS	= analyses/reachingdefinitions/wirreachingdefinitionsanalysis.h
+endif

@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += analyses/duudchain/wirduudchainanalysis.cc analyses/duudchain/wirduudchainanalysis.h
+
+if !WITH_RESTRICTED_INSTALL
+  duudincludedir	= ${includedir}/analyses/duudchain
+
+  duudinclude_HEADERS	= analyses/duudchain/wirduudchainanalysis.h
+endif

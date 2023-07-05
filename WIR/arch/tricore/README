@@ -1,0 +1,24 @@
+0. INTRODUCTION:
+================
+
+This directory contains all WIR components for the Infineon TriCore processor
+architectures.
+
+
+1. DIRECTORY STRUCTURE:
+=======================
+
+The current folder contains the following sub-folders:
+
+- analyses: Contains all TriCore-specific WIR code analyses.
+
+- asmparser: Contains a TriCore assembly code parser that creates WIR code from
+    a given stream or string.
+
+- doc: Contains the official Infineon documents for the abovementioned processor
+    architectures, including the TriCore 1.3.1 Core Architecture and ISA
+    manuals and the TriCore EABI.
+
+- optimizations: Contains all TriCore-specific WIR code optimizations.
+
+- tests: Contains various TriCore-specific test cases.

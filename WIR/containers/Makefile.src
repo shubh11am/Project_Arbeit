@@ -1,0 +1,37 @@
+libwir_la_SOURCES      += containers/wiravailabledefinitions.cc containers/wiravailabledefinitions.h \
+                          containers/wirbitvalues.cc containers/wirbitvalues.h \
+                          containers/wirbreak.cc containers/wirbreak.h \
+                          containers/wircomment.cc containers/wircomment.h \
+                          containers/wircontroltree.cc containers/wircontroltree.h \
+                          containers/wirdataaccess.cc containers/wirdataaccess.h \
+                          containers/wirdomination.cc containers/wirdomination.h \
+                          containers/wirduudchain.cc containers/wirduudchain.h \
+                          containers/wirfileinfo.cc containers/wirfileinfo.h \
+                          containers/wirflowfactref.cc containers/wirflowfactref.h \
+                          containers/wirimmediatedomination.cc containers/wirimmediatedomination.h \
+                          containers/wirliveout.cc containers/wirliveout.h \
+                          containers/wirloopexit.cc containers/wirloopexit.h \
+                          containers/wirreachability.cc containers/wirreachability.h \
+                          containers/wirreachingdefinitions.cc containers/wirreachingdefinitions.h \
+                          containers/wirschedulingconstraint.cc containers/wirschedulingconstraint.h
+
+if !WITH_RESTRICTED_INSTALL
+  contincludedir	= ${includedir}/containers
+
+  continclude_HEADERS	= containers/wiravailabledefinitions.h \
+                          containers/wirbitvalues.h \
+                          containers/wirbreak.h \
+                          containers/wircomment.h \
+                          containers/wircontroltree.h \
+                          containers/wirdataaccess.h \
+                          containers/wirdomination.h \
+                          containers/wirduudchain.h \
+                          containers/wirfileinfo.h \
+                          containers/wirflowfactref.h \
+                          containers/wirimmediatedomination.h \
+                          containers/wirliveout.h \
+                          containers/wirloopexit.h \
+                          containers/wirreachability.h \
+                          containers/wirreachingdefinitions.h \
+                          containers/wirschedulingconstraint.h
+endif

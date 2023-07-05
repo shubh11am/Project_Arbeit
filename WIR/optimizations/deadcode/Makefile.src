@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += optimizations/deadcode/wirdeadcode.cc optimizations/deadcode/wirdeadcode.h
+
+if !WITH_RESTRICTED_INSTALL
+  odceincludedir	= ${includedir}/optimizations/deadcode
+
+  odceinclude_HEADERS	= optimizations/deadcode/wirdeadcode.h
+endif

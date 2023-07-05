@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += optimizations/constprop/wirconstprop.cc optimizations/constprop/wirconstprop.h
+
+if !WITH_RESTRICTED_INSTALL
+  ocpincludedir		= ${includedir}/optimizations/constprop
+
+  ocpinclude_HEADERS	= optimizations/constprop/wirconstprop.h
+endif

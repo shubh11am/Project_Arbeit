@@ -1,0 +1,19 @@
+libwir_la_SOURCES      += arch/tricore/optimizations/scheduling/tcblockschedulingregion.cc arch/tricore/optimizations/scheduling/tcblockschedulingregion.h \
+                          arch/tricore/optimizations/scheduling/tclocalscheduling.cc arch/tricore/optimizations/scheduling/tclocalscheduling.h \
+                          arch/tricore/optimizations/scheduling/tcmaxdelaypriority.cc arch/tricore/optimizations/scheduling/tcmaxdelaypriority.h \
+                          arch/tricore/optimizations/scheduling/tcmobilitypriority.cc arch/tricore/optimizations/scheduling/tcmobilitypriority.h \
+                          arch/tricore/optimizations/scheduling/tcnoofsuccspriority.cc arch/tricore/optimizations/scheduling/tcnoofsuccspriority.h \
+                          arch/tricore/optimizations/scheduling/tcschedulinginfo.cc arch/tricore/optimizations/scheduling/tcschedulinginfo.h \
+                          arch/tricore/optimizations/scheduling/tcschedulingpriority.cc arch/tricore/optimizations/scheduling/tcschedulingpriority.h
+
+if !WITH_RESTRICTED_INSTALL
+  otcschedincludedir	= ${includedir}/arch/tricore/optimizations/scheduling
+
+  otcschedinclude_HEADERS= arch/tricore/optimizations/scheduling/tcblockschedulingregion.h \
+                           arch/tricore/optimizations/scheduling/tclocalscheduling.h \
+                           arch/tricore/optimizations/scheduling/tcmaxdelaypriority.h \
+                           arch/tricore/optimizations/scheduling/tcmobilitypriority.h \
+                           arch/tricore/optimizations/scheduling/tcnoofsuccspriority.h \
+                           arch/tricore/optimizations/scheduling/tcschedulinginfo.h \
+                           arch/tricore/optimizations/scheduling/tcschedulingpriority.h
+endif

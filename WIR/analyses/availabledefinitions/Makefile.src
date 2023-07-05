@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += analyses/availabledefinitions/wiravailabledefinitionsanalysis.cc analyses/availabledefinitions/wiravailabledefinitionsanalysis.h
+
+if !WITH_RESTRICTED_INSTALL
+  aadefincludedir	= ${includedir}/analyses/availabledefinitions
+
+  aadefinclude_HEADERS	= analyses/availabledefinitions/wiravailabledefinitionsanalysis.h
+endif

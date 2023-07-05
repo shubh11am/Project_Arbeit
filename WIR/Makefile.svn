@@ -1,0 +1,82 @@
+#
+#
+#   This script belongs to the
+#
+#            Hamburg University of Technology (TUHH)
+#              WCC Intermediate Representation Framework
+#
+#   and is property of its respective copyright holder. It must neither be used
+#   nor published even in parts without explicit written permission.
+#
+#   Copyright 2015 - 2022, Heiko Falk.
+#
+#   Hamburg University of Technology (TUHH)
+#   Institute of Embedded Systems
+#   21071 Hamburg
+#   Germany
+#
+#   http://www.tuhh.de/es/esd/research/wcc
+#
+#
+
+default: all
+
+all: \
+	autoconf-version automake-version
+	@VERS=`libtoolize --version | grep libtoolize | awk '{print $$NF}'`; \
+	MAJOR=`echo $$VERS | cut -d '.' -f1`; \
+	SECOND=`echo $$VERS | cut -d '.' -f2`; \
+	MINOR=`echo $$VERS | cut -d '.' -f3`; \
+	if [ "$$MAJOR" -ge "2" ] && [ "$$SECOND" -ge "4" ] && [ "$$MINOR" -gt "2" ]; then \
+	  echo "libtoolize -q -c -f --subproject"; \
+	  libtoolize -q -c -f --subproject; \
+	else \
+	  echo "libtoolize -q -c"; \
+	  libtoolize -q -c; \
+	fi;
+	aclocal
+	autoheader
+	automake -a -c
+	autoconf
+
+autoconf-version:
+	@VERS=`autoconf --version | grep autoconf | awk '{print $$NF}'`; \
+	MAJOR=`echo $$VERS | cut -d '.' -f1`; \
+	MINOR=`echo $$VERS | cut -d '.' -f2`; \
+	ERROR=0; \
+	if [ $$MAJOR -lt 2 ]; then \
+	  ERROR=1; \
+	fi; \
+	if [ $$MAJOR = "2" ] && [ $$MINOR -lt 69 ]; then \
+	  ERROR=1; \
+	fi; \
+	if [ $$ERROR = 1 ]; then \
+	  echo "ERROR: Your version of autoconf is too old."; \
+	  echo "       Please use autoconf 2.69 or newer."; \
+	  echo ""; \
+	  echo "Exiting."; \
+	  exit 1; \
+	fi
+
+automake-version:
+	@VERS=`automake --version | grep automake | awk '{print $$NF}'`; \
+	MAJOR=`echo $$VERS | cut -d '.' -f1`; \
+	MINOR=`echo $$VERS | cut -d '.' -f2`; \
+	SUB=`echo $$VERS | cut -d '.' -f3`; \
+	ERROR=0; \
+	if [ $$MAJOR -lt 1 ]; then \
+	  ERROR=1; \
+	fi; \
+	if [ $$MAJOR = 1 ] && [ $$MINOR -lt 16 ]; then \
+	  ERROR=1; \
+	fi; \
+	if [ $$MAJOR = 1 ] && [ $$MINOR = 16 ] && [ $$SUB -lt 1 ]; then \
+	  ERROR=1; \
+	fi; \
+	if [ $$ERROR = 1 ]; then \
+	  echo "ERROR: Your version of automake is too old."; \
+	  echo "       Please use automake 1.16.1 or newer."; \
+	  echo ""; \
+	  echo "Exiting."; \
+	  exit 1; \
+	fi

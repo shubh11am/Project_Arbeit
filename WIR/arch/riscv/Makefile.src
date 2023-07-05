@@ -1,0 +1,48 @@
+if BUILD_RISCV
+
+include arch/riscv/analyses/Makefile.src
+include arch/riscv/optimizations/Makefile.src
+
+libwir_la_SOURCES      += arch/riscv/rv32i.cc arch/riscv/rv32i.h \
+                          arch/riscv/rv32ic.cc arch/riscv/rv32ic.h \
+                          arch/riscv/rv32im.cc arch/riscv/rv32im.h \
+                          arch/riscv/rv32imc.cc arch/riscv/rv32imc.h \
+                          arch/riscv/rv32iopcodes.cc \
+                          arch/riscv/rv32icopcodes.cc \
+                          arch/riscv/rv32imopcodes.cc \
+                          arch/riscv/rv32ioperationformats.cc \
+                          arch/riscv/rv32icoperationformats.cc \
+                          arch/riscv/rv32iregistertypes.cc \
+                          arch/riscv/rvconst5unsigned.cc arch/riscv/rvconst5unsigned.h \
+                          arch/riscv/rvconst6signed.cc arch/riscv/rvconst6signed.h \
+                          arch/riscv/rvconst6unsigned.cc arch/riscv/rvconst6unsigned.h \
+                          arch/riscv/rvconst8unsigned.cc arch/riscv/rvconst8unsigned.h \
+                          arch/riscv/rvconst12signed.cc arch/riscv/rvconst12signed.h \
+                          arch/riscv/rvconst20unsigned.cc arch/riscv/rvconst20unsigned.h \
+                          arch/riscv/rvio.cc arch/riscv/rvio.h \
+                          arch/riscv/rvregphysical.cc arch/riscv/rvregphysical.h \
+                          arch/riscv/rvregvirtual.cc arch/riscv/rvregvirtual.h
+
+if !WITH_RESTRICTED_INSTALL
+  arrvincludedir	= ${includedir}/arch/riscv
+
+  arrvinclude_HEADERS	= arch/riscv/rv32i.h \
+                          arch/riscv/rv32ic.h \
+                          arch/riscv/rv32im.h \
+                          arch/riscv/rv32imc.h \
+                          arch/riscv/rvconst5unsigned.h \
+                          arch/riscv/rvconst6signed.h \
+                          arch/riscv/rvconst6unsigned.h \
+                          arch/riscv/rvconst8unsigned.h \
+                          arch/riscv/rvconst12signed.h \
+                          arch/riscv/rvconst20unsigned.h \
+                          arch/riscv/rvio.h \
+                          arch/riscv/rvregphysical.h \
+                          arch/riscv/rvregvirtual.h
+endif
+
+arrvsysconfdir		= ${sysconfdir}/riscv
+
+arrvsysconf_DATA	= arch/riscv/rudolv.sys
+
+endif

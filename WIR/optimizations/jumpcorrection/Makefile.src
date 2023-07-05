@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += optimizations/jumpcorrection/wirjumpcorrection.cc optimizations/jumpcorrection/wirjumpcorrection.h
+
+if !WITH_RESTRICTED_INSTALL
+  ojmpcorrectincludedir	= ${includedir}/optimizations/jumpcorrection
+
+  ojmpcorrectinclude_HEADERS	= optimizations/jumpcorrection/wirjumpcorrection.h
+endif

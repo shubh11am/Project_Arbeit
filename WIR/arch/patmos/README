@@ -1,0 +1,13 @@
+0. INTRODUCTION:
+================
+
+This directory contains some material for the PATMOS processor architecture.
+
+
+1. DIRECTORY STRUCTURE:
+=======================
+
+The current folder contains the following sub-folders:
+
+- doc: Contains the official PATMOS handbook as it can be found on
+    http://patmos.compute.dtu.dk/patmos_handbook.pdf

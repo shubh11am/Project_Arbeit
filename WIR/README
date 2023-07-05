@@ -1,0 +1,116 @@
+0. INTRODUCTION:
+================
+
+This package contains the WCC Intermediate Representation framework, WIR for
+short.
+
+
+1. DIRECTORY STRUCTURE:
+=======================
+
+The current folder contains the following sub-folders:
+
+- DEBUGMACRO_CONF: Contains configuration files to control the
+    activation/deactivation of macros for debugging, if the WIR library is built
+    with support for LIBUSEFUL.
+
+- analyses: Contains all processor-independent WIR code analyses.
+
+- arch: Contains all processor architecture-specific components of WIR.
+
+- containers: Contains all generic container classes of WIR that can be used to
+    add arbitrary meta-data to WIR objects. In particular, the WIR code analyses
+    use containers to attach analysis results to WIR objects.
+
+- doc: Contains the entire documentation of the WIR library - in particular the
+    API documentation generated dynamically using doxygen (doc/html/index.html).
+
+- optimizations: Contains all processor-independent WIR code optimizations.
+
+- tests: Contains test cases covering various aspects of the generic,
+    processor-independent WIR components.
+
+- wir: Contains all generic and processor-independent components of WIR.
+
+
+2. DOCUMENTATION:
+=================
+
+The folder doc contains the documentation for WIR.
+
+
+3. INSTALLATION:
+================
+
+3.1 Prerequisites:
+------------------
+
+In order to build WIR, you need to have the libraries and header files of the
+following packages:
+
+  LIBUSEFUL
+
+
+3.2 Preprocessing after SVN checkout:
+-------------------------------------
+
+If you just have checked out this software distribution from its SVN
+repository, run
+
+  make -f Makefile.svn
+
+at first. This will run autoconf and automake in order to generate the build
+environment. The WIR build environment is known to work with
+
+  autoconf 2.69
+  automake 1.14.1 and
+  libtool 2.4.2
+
+
+3.3 Configuration, build and installation:
+------------------------------------------
+
+3.3.1 Configuration:
+^^^^^^^^^^^^^^^^^^^^
+
+If you intend to build WIR with LLVM as C++ compiler, execute
+
+  export CC=clang
+  export CXX=clang++
+  export CXXFLAGS="-ftemplate-depth=1024 -D_GLIBCXX_USE_CXX11_ABI=0"
+
+at first (for g++, nothing needs to be done). After that, you need to run the
+configure script of WIR. When invoking configure, you have to specify the paths
+where to find libraries and header files of the required package LIBUSEFUL.
+
+If the LIBUSEFUL library libuseful.la resides in path
+<path1>/libuseful/libuseful.la, then add --with-libuseful=<path1> to your call
+of configure. Furthermore, if the header file useful.h resides in
+<path2>/libuseful/useful.h, then add --with-libuseful-headers=<path2>. A minimal
+call of the WIR configure sript thus looks like:
+
+  ./configure --with-libuseful=<> --with-libuseful-headers=<>
+
+For further command-line options of configure, please type
+
+  ./configure --help
+
+
+3.3.2 Build:
+^^^^^^^^^^^^
+
+Run 'make' in in the directory where this README resides in order to build WIR.
+
+
+3.3.3 Installation:
+^^^^^^^^^^^^^^^^^^^
+
+In order to install WIR, enter
+
+  make install
+
+in the directory where this README resides.
+
+The file INSTALL in the top-level directory of this software distribution
+contains more detailed generic information about the configuration and build
+procedures.

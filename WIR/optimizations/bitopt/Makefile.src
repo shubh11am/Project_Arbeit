@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += optimizations/bitopt/wirbitopt.cc optimizations/bitopt/wirbitopt.h
+
+if !WITH_RESTRICTED_INSTALL
+  oboincludedir		= ${includedir}/optimizations/bitopt
+
+  oboinclude_HEADERS	= optimizations/bitopt/wirbitopt.h
+endif

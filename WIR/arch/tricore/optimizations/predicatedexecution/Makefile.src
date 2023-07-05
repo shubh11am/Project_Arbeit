@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += arch/tricore/optimizations/predicatedexecution/tcpredicatedexecution.cc arch/tricore/optimizations/predicatedexecution/tcpredicatedexecution.h
+
+if !WITH_RESTRICTED_INSTALL
+  otcprexincludedir	= ${includedir}/arch/tricore/optimizations/predicatedexecution
+
+  otcprexinclude_HEADERS = arch/tricore/optimizations/predicatedexecution/tcpredicatedexecution.h
+endif

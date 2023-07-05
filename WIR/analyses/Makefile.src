@@ -1,0 +1,11 @@
+include analyses/availabledefinitions/Makefile.src
+include analyses/bit/Makefile.src
+include analyses/controlflow/Makefile.src
+include analyses/domination/Makefile.src
+include analyses/duudchain/Makefile.src
+include analyses/generic/Makefile.src
+include analyses/immediatedomination/Makefile.src
+include analyses/lifeness/Makefile.src
+include analyses/reachability/Makefile.src
+include analyses/reachingdefinitions/Makefile.src
+include analyses/structuralcontrolflow/Makefile.src

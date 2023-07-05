@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += optimizations/siliconbugs/wirsiliconbugs.cc optimizations/siliconbugs/wirsiliconbugs.h
+
+if !WITH_RESTRICTED_INSTALL
+  osiliconbugsincludedir	= ${includedir}/optimizations/siliconbugs
+
+  osiliconbugsinclude_HEADERS	= optimizations/siliconbugs/wirsiliconbugs.h
+endif

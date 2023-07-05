@@ -1,0 +1,16 @@
+0. INTRODUCTION:
+================
+
+This directory contains all WIR components for a generic MIPS/SPIM processor
+architectures.
+
+
+1. DIRECTORY STRUCTURE:
+=======================
+
+The current folder contains the following sub-folders:
+
+- doc: Contains some documentation for the abovementioned processor
+    architecture, including including its ISA reference card.
+
+- tests: Contains various MIPS-specific test cases.

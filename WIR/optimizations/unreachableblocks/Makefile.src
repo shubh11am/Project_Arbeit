@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += optimizations/unreachableblocks/wirunreachableblocks.cc optimizations/unreachableblocks/wirunreachableblocks.h
+
+if !WITH_RESTRICTED_INSTALL
+  ourbincludedir	= ${includedir}/optimizations/unreachableblocks
+
+  ourbinclude_HEADERS	= optimizations/unreachableblocks/wirunreachableblocks.h
+endif

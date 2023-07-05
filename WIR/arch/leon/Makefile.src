@@ -1,0 +1,11 @@
+if BUILD_LEON
+
+if !WITH_RESTRICTED_INSTALL
+  arleonincludedir	= ${includedir}/arch/leon
+endif
+
+arleonsysconfdir	= ${sysconfdir}/leon
+
+arleonsysconf_DATA	= arch/leon/gr712rc.sys
+
+endif

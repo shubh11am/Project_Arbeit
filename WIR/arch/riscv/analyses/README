@@ -1,0 +1,13 @@
+0. INTRODUCTION:
+================
+
+This directory contains WIR-based code analyses for the open source RISC-V
+processor architectures.
+
+
+1. DIRECTORY STRUCTURE:
+=======================
+
+The current folder contains the following sub-folders:
+
+- bit: Contains a RISC-V-specific bit-true data and value flow analysis.

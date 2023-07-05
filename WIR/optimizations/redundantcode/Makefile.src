@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += optimizations/redundantcode/wirredundantcode.cc optimizations/redundantcode/wirredundantcode.h
+
+if !WITH_RESTRICTED_INSTALL
+  orcincludedir		= ${includedir}/optimizations/redundantcode
+
+  orcinclude_HEADERS	= optimizations/redundantcode/wirredundantcode.h
+endif

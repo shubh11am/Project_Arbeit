@@ -1,0 +1,13 @@
+libwir_la_SOURCES      += analyses/controlflow/wircfg.cc analyses/controlflow/wircfg.h \
+                          analyses/controlflow/wircfganalysis.cc analyses/controlflow/wircfganalysis.h \
+                          analyses/controlflow/wircfgedgeproperty.h \
+                          analyses/controlflow/wircfgnodeproperty.cc analyses/controlflow/wircfgnodeproperty.h
+
+if !WITH_RESTRICTED_INSTALL
+  acfgincludedir	= ${includedir}/analyses/controlflow
+
+  acfginclude_HEADERS	= analyses/controlflow/wircfg.h \
+                          analyses/controlflow/wircfganalysis.h \
+                          analyses/controlflow/wircfgedgeproperty.h \
+                          analyses/controlflow/wircfgnodeproperty.h
+endif

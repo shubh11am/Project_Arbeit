@@ -1,0 +1,171 @@
+#
+#
+#   This script belongs to the
+#
+#            Hamburg University of Technology (TUHH)
+#              WCC Intermediate Representation Framework
+#
+#   and is property of its respective copyright holder. It must neither be used
+#   nor published even in parts without explicit written permission.
+#
+#   Copyright 2015 - 2022, Heiko Falk.
+#
+#   Hamburg University of Technology (TUHH)
+#   Institute of Embedded Systems
+#   21071 Hamburg
+#   Germany
+#
+#   http://www.tuhh.de/es/esd/research/wcc
+#
+#
+
+
+###############################################################################
+#
+#  System specification of the NXP LPC2880 (ARM7TDMI) architecture.
+#
+#  Referring to LPC288x_UM_rev_02.pdf
+#
+#  For details about the syntax and semantics of the directives in this file,
+#  please refer to the doxygen documentation of class WIR_SystemConfig.
+#
+
+# ATTENTION: The flash contains 1024K which is mapped into the internal memory
+#            area (above 0x0FFF.FFFF) which is not cached. To enable caching of
+#            flash content, the startup code has to remap parts to the cacheable
+#            area (0x0FFF.FFFF and below).
+
+#
+# NXP LPC2880
+#
+[lpc2880]
+type               = system
+
+
+#
+# Processor core (ISA ARMv4T)
+#
+[CORE0]
+type               = core
+isa                = ARMv4T
+clockfreq          = 150000000
+voltage            = 3.3
+
+
+#
+# Fixed boot ROM
+#
+[BOOT]
+type               = memory
+origin             = 0x00000000
+length             = 0x400      # 1K
+attributes         = R
+cycles             = 1
+clockratio         = 1:1
+sections           = .exception_vector .boot
+hierarchy          = CORE0
+
+
+#
+# Internal RAM (SRAM; L1, Data)
+#
+[SRAM]
+type               = memory
+origin             = 0x00400000
+length             = 0x10000    # 64K
+attributes         = RWXA       # read/write/execute/allocatable
+clockratio         = 1:1
+cycles             = 1
+buswidth           = 32
+sections           = .data .sbss .bss .sdata .zbss .zdata
+hierarchy          = CORE0
+
+
+#
+# Internal RAM (SRAM; L1; Code)
+#
+[CODE-SRAM]
+type               = memory
+origin             = 0x00410000
+length             = 0x10000    # 64K
+attributes         = RWXA       # read/write/execute/allocatable
+clockratio         = 1:1
+cycles             = 1
+buswidth           = 32
+sections           = .text_spm
+hierarchy          = CORE0
+
+
+#
+# Stack, part of scratchpad memory (SRAM; L1)
+#
+[CSI-SP]
+type               = memory
+origin             = 0x00420000
+length             = 0x8000     # 32K
+attributes         = RW         # read/write
+clockratio         = 1:1
+cycles             = 1
+buswidth           = 32
+sections           = .stack
+hierarchy          = CORE0
+
+
+#
+# Flash with cached access (FLASH; L1)
+#
+[FLASH-C]
+type               = memory
+origin             = 0x00500000
+length             = 0x100000   # 1024K
+attributes         = RXAC       # read/execute/allocate/cached
+clockratio         = 1:1
+buswidth           = 32
+cycles             = 6
+sections           = .text_cached
+hierarchy          = CORE0 L1-I
+
+
+#
+# Flash with non-cached access (FLASH; L1)
+#
+[FLASH-NC]
+type               = memory
+origin             = 0x10400000
+length             = 0x80000    # 512K
+attributes         = RXA        # read/execute
+sections           = .text .init
+clockratio         = 1:1
+buswidth           = 32
+cycles             = 6
+hierarchy          = CORE0
+
+[DFLASH-NC]
+type               = memory
+origin             = 0x10480000
+length             = 0x80000    # 512K
+attributes         = RA        # read
+sections           = .rodata
+clockratio         = 1:1
+buswidth           = 32
+cycles             = 6
+hierarchy          = CORE0
+
+
+#
+# L1 instruction cache
+#
+[L1-I]
+type               = cache
+cache_type         = I
+size               = 16384
+associativity      = 2
+linesize           = 32
+enabled            = 0
+shared             = 0
+writethrough       = 1
+writeallocate      = 1
+hitdelay           = 1
+missdelay          = 2
+buswidth           = 4
+#percent_size       = 42

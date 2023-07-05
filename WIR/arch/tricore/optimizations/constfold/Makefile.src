@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += arch/tricore/optimizations/constfold/tcconstfold.cc arch/tricore/optimizations/constfold/tcconstfold.h
+
+if !WITH_RESTRICTED_INSTALL
+  otccfincludedir	= ${includedir}/arch/tricore/optimizations/constfold
+
+  otccfinclude_HEADERS= arch/tricore/optimizations/constfold/tcconstfold.h
+endif

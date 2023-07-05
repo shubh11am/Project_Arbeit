@@ -1,0 +1,26 @@
+libwir_la_SOURCES      += arch/generic/mips.cc arch/generic/mips.h \
+                          arch/generic/mipsimmediate5shamt.cc arch/generic/mipsimmediate5shamt.h \
+                          arch/generic/mipsimmediate16signed.cc arch/generic/mipsimmediate16signed.h \
+                          arch/generic/mipsimmediate16unsigned.cc arch/generic/mipsimmediate16unsigned.h \
+                          arch/generic/mipsio.cc arch/generic/mipsio.h \
+                          arch/generic/mipsopcodes.cc \
+                          arch/generic/mipsoperationformats.cc \
+                          arch/generic/mipsregistertypes.cc \
+                          arch/generic/mipsregphysical.cc arch/generic/mipsregphysical.h \
+                          arch/generic/mipsregvirtual.cc arch/generic/mipsregvirtual.h
+
+if !WITH_RESTRICTED_INSTALL
+  argenincludedir	= ${includedir}/arch/generic
+
+  argeninclude_HEADERS	= arch/generic/mips.h \
+                          arch/generic/mipsimmediate5shamt.h \
+                          arch/generic/mipsimmediate16signed.h \
+                          arch/generic/mipsimmediate16unsigned.h \
+                          arch/generic/mipsio.h \
+                          arch/generic/mipsregphysical.h \
+                          arch/generic/mipsregvirtual.h
+endif
+
+argensysconfdir		= ${sysconfdir}/generic
+
+argensysconf_DATA	= arch/generic/genericmips.sys

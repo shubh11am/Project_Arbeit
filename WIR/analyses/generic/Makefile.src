@@ -1,0 +1,20 @@
+libwir_la_SOURCES      += analyses/generic/safeint.h \
+                          analyses/generic/wiranalysis.cc analyses/generic/wiranalysis.h \
+                          analyses/generic/wirbitvector.h \
+                          analyses/generic/wirinterval.h \
+                          analyses/generic/wirintervalset.h \
+                          analyses/generic/wirmodulointervalset.h \
+                          analyses/generic/wirsaturatingint.h
+
+if !WITH_RESTRICTED_INSTALL
+  agenincludedir	= ${includedir}/analyses/generic
+
+  ageninclude_HEADERS	= analyses/generic/safeint.h \
+                          analyses/generic/wiranalysis.h \
+                          analyses/generic/wirbitvector.h \
+                          analyses/generic/wirinterval.h \
+                          analyses/generic/wirintervalset.h \
+                          analyses/generic/wirmodulointervalset.h \
+                          analyses/generic/wirsaturatingint.h
+
+endif

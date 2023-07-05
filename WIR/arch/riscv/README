@@ -1,0 +1,21 @@
+0. INTRODUCTION:
+================
+
+This directory contains all WIR components for the open source RISC-V processor
+architectures.
+
+
+1. DIRECTORY STRUCTURE:
+=======================
+
+The current folder contains the following sub-folders:
+
+- analyses: Contains all RISC-V-specific WIR code analyses.
+
+- doc: Contains the official RISC-V documents for the abovementioned processor
+    architectures, including the RISC-V Version 2.2 Instruction Set Manual and
+    the RISC-V Privileged Machine-Level ISA version 1.11.
+
+- optimizations: Contains all RISC-V-specific WIR code optimizations.
+
+- tests: Contains various RISC-V-specific test cases.

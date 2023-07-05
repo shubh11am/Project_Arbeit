@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += optimizations/loopinvariantcm/wirloopinvariantcm.cc optimizations/loopinvariantcm/wirloopinvariantcm.h
+
+if !WITH_RESTRICTED_INSTALL
+  olicmincludedir	= ${includedir}/optimizations/loopinvariantcm
+
+  olicminclude_HEADERS	= optimizations/loopinvariantcm/wirloopinvariantcm.h
+endif

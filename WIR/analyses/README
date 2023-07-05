@@ -1,0 +1,35 @@
+0. INTRODUCTION:
+================
+
+This directory contains all processor-independent WIR code analyses.
+
+
+1. DIRECTORY STRUCTURE:
+=======================
+
+The current folder contains the following sub-folders:
+
+- availabledefinitions: Contains an available-definitions analysis.
+
+- bit: Contains a bit-true data and value flow analysis.
+
+- controlflow: Contains a CFG representation and a base class for generic
+    control flow analyses.
+
+- domination: Contains a domination analysis.
+
+- duudchain: Contains a def-use and use-def chain analysis.
+
+- generic: Contains a base class for generic WIR analyses and several generic
+    data types that are frequently used by various WIR analyses.
+
+- immediatedomination: Contains an immediate domination analysis.
+
+- lifeness: Contains a lifeness analysis for WIR registers.
+
+- reachability: Contains a control flow analysis for reachability of basic
+    blocks.
+
+- reachingdefinitions: Contains a reaching-definitions analysis.
+
+- structuralcontrolflow: Contains a structural control flow analysis.

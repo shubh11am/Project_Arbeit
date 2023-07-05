@@ -1,0 +1,19 @@
+libwir_la_SOURCES      += analyses/bit/wirbitdfa.cc analyses/bit/wirbitdfa.h \
+                          analyses/bit/wirdfg.cc analyses/bit/wirdfg.h \
+                          analyses/bit/wirdfgedgeproperty.cc analyses/bit/wirdfgedgeproperty.h \
+                          analyses/bit/wirdfgnodeproperty.cc analyses/bit/wirdfgnodeproperty.h \
+                          analyses/bit/wirl4.cc analyses/bit/wirl4.h \
+                          analyses/bit/wirlocation.cc analyses/bit/wirlocation.h \
+                          analyses/bit/wirupdownvalue.cc analyses/bit/wirupdownvalue.h
+
+if !WITH_RESTRICTED_INSTALL
+  abitincludedir	= ${includedir}/analyses/bit
+
+  abitinclude_HEADERS	= analyses/bit/wirbitdfa.h \
+                          analyses/bit/wirdfg.h \
+                          analyses/bit/wirdfgedgeproperty.h \
+                          analyses/bit/wirdfgnodeproperty.h \
+                          analyses/bit/wirl4.h \
+                          analyses/bit/wirlocation.h \
+                          analyses/bit/wirupdownvalue.h
+endif

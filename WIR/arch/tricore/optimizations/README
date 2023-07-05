@@ -1,0 +1,42 @@
+0. INTRODUCTION:
+================
+
+This directory contains WIR-based code optimizations for the Infineon TriCore
+processor architectures.
+
+
+1. DIRECTORY STRUCTURE:
+=======================
+
+The current folder contains the following sub-folders:
+
+- constfold: Contains a TriCore-specific constant folding optimization using
+    bit-true data and value flow analysis.
+
+- constprop: Contains a TriCore-specific constant propagation optimization using
+    bit-true data and value flow analysis.
+
+- deadcode: Contains a TriCore-specific dead code elimination using bit-true
+    data and value flow analysis.
+
+- gcregallocation: Contains a TriCore-specific graph coloring-based register
+    allocator.
+
+- jumpcorrection: Contains a TriCore-specific jump displacement correction.
+
+- operationbitwidths: Contains a TriCore-specific optimization reducing the bit
+    widths of machine operations.
+
+- peephole: Contains some TriCore-specific peephole optimizers.
+
+- predicatedexecution: Contains a Tricore-specific optimization replacing
+    conditionally executed arithmetical operations by predicated operations.
+
+- redundantcode: Contains a TriCore-specific optimization that removes redundant
+    code from functions using bit-true data and value flow analysis.
+
+- scheduling: Contains a TriCore-specific local instruction scheduler using list
+    scheduling.
+
+- siliconbugs: Contains code transformations to work around silicon bugs in the
+    TriCore architectures.

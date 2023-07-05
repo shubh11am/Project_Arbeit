@@ -1,0 +1,134 @@
+#
+#
+#   This script belongs to the
+#
+#            Hamburg University of Technology (TUHH)
+#              WCC Intermediate Representation Framework
+#
+#   and is property of its respective copyright holder. It must neither be used
+#   nor published even in parts without explicit written permission.
+#
+#   Copyright 2015 - 2022, Heiko Falk.
+#
+#   Hamburg University of Technology (TUHH)
+#   Institute of Embedded Systems
+#   21071 Hamburg
+#   Germany
+#
+#   http://www.tuhh.de/es/esd/research/wcc
+#
+#
+
+
+###############################################################################
+#
+#  System specification of the STMicroelectronics STM32F051xx ARM Cortex-M0
+#  based architecture.
+#
+#  Referring to stm32f051r8.pdf (revision 7)
+#
+#  For details about the syntax and semantics of the directives in this file,
+#  please refer to the doxygen documentation of class WIR_SystemConfig.
+#
+
+#
+# STMicroelectronics STM32F051xx
+#
+[stm32f051]
+type               = system
+
+
+#
+# Processor core
+# (TODO: Specify corrrectly as soon as WIR ISA for Cortex-M0 is available!)
+#
+[CORE0]
+type               = core
+isa                = ARMv4T
+clockfreq          = 48000000
+voltage            = 3.6
+
+
+#
+# Fixed boot ROM
+#
+[BOOT]
+type               = memory
+origin             = 0x00000000
+length             = 0x400      # 1K
+attributes         = R
+cycles             = 1
+clockratio         = 1:1
+sections           = .exception_vector .boot
+hierarchy          = CORE0
+
+
+#
+# Internal RAM (SRAM; L1, Data)
+#
+[SRAM]
+type               = memory
+origin             = 0x20000000
+length             = 0x800      # 2K
+attributes         = RWA        # read/write/allocatable
+clockratio         = 1:1
+cycles             = 1
+buswidth           = 32
+sections           = .data .sbss .bss .sdata .zbss .zdata
+hierarchy          = CORE0
+
+
+#
+# Internal RAM (SRAM; L1; Code)
+#
+[CODE-SRAM]
+type               = memory
+origin             = 0x20000800
+length             = 0x1000     # 4K
+attributes         = RWXA       # read/write/execute/allocatable
+clockratio         = 1:1
+cycles             = 1
+buswidth           = 32
+sections           = .text_spm
+hierarchy          = CORE0
+
+
+#
+# Stack, part of scratchpad memory (SRAM; L1)
+#
+[CSI-SP]
+type               = memory
+origin             = 0x20001800
+length             = 0x800      # 2K
+attributes         = RW         # read/write
+clockratio         = 1:1
+cycles             = 1
+buswidth           = 32
+sections           = .stack
+hierarchy          = CORE0
+
+
+#
+# Flash with non-cached access (FLASH; L1)
+#
+[FLASH-NC]
+type               = memory
+origin             = 0x08004000
+length             = 0x8000     # 32K
+attributes         = RWXA       # read/write/execute
+sections           = .text .init
+clockratio         = 1:1
+buswidth           = 32
+cycles             = 6
+hierarchy          = CORE0
+
+[DFLASH-NC]
+type               = memory
+origin             = 0x08000000
+length             = 0x4000     # 16K
+attributes         = RWA        # read/write
+sections           = .rodata
+clockratio         = 1:1
+buswidth           = 32
+cycles             = 6
+hierarchy          = CORE0

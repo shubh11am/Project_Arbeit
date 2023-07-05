@@ -1,0 +1,7 @@
+libwir_la_SOURCES      += analyses/lifeness/wirlifenessanalysis.cc analyses/lifeness/wirlifenessanalysis.h
+
+if !WITH_RESTRICTED_INSTALL
+  altaincludedir	= ${includedir}/analyses/lifeness
+
+  altainclude_HEADERS	= analyses/lifeness/wirlifenessanalysis.h
+endif

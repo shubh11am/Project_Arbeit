@@ -1,0 +1,321 @@
+#
+#
+#   This script belongs to the
+#
+#            Hamburg University of Technology (TUHH)
+#              WCC Intermediate Representation Framework
+#
+#   and is property of its respective copyright holder. It must neither be used
+#   nor published even in parts without explicit written permission.
+#
+#   Copyright 2015 - 2022, Heiko Falk.
+#
+#   Hamburg University of Technology (TUHH)
+#   Institute of Embedded Systems
+#   21071 Hamburg
+#   Germany
+#
+#   http://www.tuhh.de/es/esd/research/wcc
+#
+#
+
+
+###############################################################################
+#
+#  System specification of the Infineon TriCore TC1796 architecture.
+#
+#  Referring to tc1796_um_v2.0_2007_07.pdf, existing linker-scripts and aiT's
+#  TriCore machine specification file (Flash timing).
+#
+#  For details about the syntax and semantics of the directives in this file,
+#  please refer to the doxygen documentation of class WIR_SystemConfig.
+#
+
+# ATTENTION: The program flash contains 2048K which is mapped into cached
+#            memory area as well as into the non-cached memory area. For easy
+#            allocation, we divide it into two disjoint partitions of 1024K to
+#            ensure that no objects are allocated into the same physical memory
+#            cell.
+
+#
+# The TC1796 comprises the following memories (differ from the memory layout):
+#
+# 0x8000.0000,   2MB: Program Flash		(PFLASH)
+# 0x8FE0.0000, 128KB: Data Flash		(DFLASH)
+# 0xA000.0000,   2MB: Program Flash  		(PFLASH, cached)
+# 0xAFE0.0000, 128KB: Data Flash    		(DFLASH)
+# 0xC000.0000,  64KB: DMU data memory	       	(SRAM)
+# 0xC03F.0000,  16KB: PMU stand-by data memory 	(SBRAM)
+# 0xD000.0000,  56KB: DMI Local Data RAM	(LDRAM)
+# 0xD000.E000,   8KB: DMI Local Dual-Port RAM	(DPRAM)
+# 0xD400.0000,  48KB: PMI Scratch-Pad RAM 	(SPRAM)
+#
+
+#
+# Infineon TriCore TC1796
+#
+[tc1796]
+type               = system
+
+
+#
+# Processor core (ISA TC1.3)
+#
+[CORE0]
+type               = core
+isa                = TC1.3
+clockfreq          = 150000000
+voltage            = 1.5
+
+
+#
+# Program Flash with cached access (PFLASH; PMU; L2)
+#
+[PFLASH-C]
+type               = memory
+origin             = 0x80100000
+length             = 0x100000   # 1024K until partitioning is done automatically
+dynamic_allocation = 0
+attributes         = RXAC       # read/execute/allocate/cached
+cycles             = 6          # WS; Possible values are 1-7
+burstcycles        = 1
+memory_type        = PFLASH
+sections           = .text_cached
+hierarchy          = CORE0 L1-I
+
+
+#
+# L1 instruction cache
+#
+[L1-I]
+type               = cache
+cache_type         = I
+size               = 16384
+associativity      = 2
+linesize           = 32
+enabled            = 1
+shared             = 0
+buswidth           = 4
+#writethrough       = 1
+#writeallocate      = 1
+#hitdelay           = 1
+#missdelay          = 2
+##percent_size       = 42
+
+
+#
+# Fixed TC1796 boot ROM
+#
+[BOOT]
+type               = memory
+origin             = 0x8fffc000
+length             = 0x200
+dynamic_allocation = 0
+attributes         = R
+memory_type        = BROM
+cycles             = 0
+hierarchy          = CORE0
+
+
+#
+# We define a separate startup section at the beginning of flash memory
+# This is required for systems with fixed reset vector like CoMET!
+#
+[PFLASH-STARTUP]
+type               = memory
+origin             = 0xa0000000
+length             = 0x1000     # 4K startup code
+dynamic_allocation = 0
+attributes         = RXA        # read/execute
+cycles             = 6
+memory_type        = PFLASH
+sections           = .startup_code
+hierarchy          = CORE0
+
+
+#
+# Program Flash with non-cached access (PFLASH; PMU; L2)
+#
+[PFLASH-NC]
+type               = memory
+origin             = 0xa0001000
+length             = 0xFE000    # 1024K until partitioning is done automatically
+dynamic_allocation = 0
+attributes         = RXA        # read/execute
+cycles             = 6
+memory_type        = PFLASH
+sections           = .text .init .eh_frame .ctors .dtors
+load               = .text_spm .pcptext .pcpdata
+hierarchy          = CORE0
+
+
+#
+# Data Flash with non-cached access (DFLASH; PMU; L2)
+#
+[DFLASH]
+type               = memory
+origin             = 0xafe00000
+length             = 0x20000    # 128K
+dynamic_allocation = 0
+attributes         = R          # read
+cycles             = 6          # WS; Possible values are 1-7
+memory_type        = DFLASH
+sections           = .rodata
+load               = .data .data_sbram .data_spm .sdata .zdata
+hierarchy          = CORE0
+
+
+#
+# Data SRAM (DMU), slower than DMI (SRAM; DMU; L2)
+#
+[DMU-SRAM]
+type               = memory
+origin             = 0xc0000000
+length             = 0x10000    # 64K
+dynamic_allocation = 0
+attributes         = RWA        # read/write/allocatable
+cycles             = 1
+memory_type        = SPRAM
+sections           = .data .bss .sbss .sdata .zbss .zdata
+hierarchy          = CORE0
+
+
+#
+# Stand-by data RAM (SBRAM; DMU; L2)
+#
+[DMU-SBRAM]
+type               = memory
+origin             = 0xc03fc000
+length             = 0x4000     # 16K
+dynamic_allocation = 0
+attributes         = RW         # read/write
+cycles             = 1
+memory_type        = SRAM
+sections           = .data_sbram
+hierarchy          = CORE0
+
+
+# The physical DMI contains 56K LDRAM and 8K DPRAM. For easy allocation,
+# we divide the LDRAM into 36K for free use and 28K for the stack.
+# The DPRAM is fully used for the context save area.
+
+#
+# Stack, part of scratchpad memory (LDRAM; DMI; L1)
+#
+[DMI-SP]
+type               = memory
+origin             = 0xd0000000
+length             = 0x7000     # 28K
+dynamic_allocation = 1
+attributes         = RW         # read/write
+cycles             = 0
+memory_type        = LDRAM
+sections           = .stack
+hierarchy          = CORE0
+
+
+#
+# Local Data RAM (LDRAM; DMI; L1)
+#
+[DMI-LDRAM]
+type               = memory
+origin             = 0xd0007000
+length             = 0x7000     # 28K
+dynamic_allocation = 0
+attributes         = RWA        # read/write/allocatable
+cycles             = 1
+memory_type        = LDRAM
+sections           = .data_spm
+hierarchy          = CORE0
+
+
+#
+# Dual Port data RAM (DPRAM; DMI; L1), used for context save area
+#
+[DMI-DPRAM]
+type               = memory
+origin             = 0xd000e000
+length             = 0x2000     # 8K
+dynamic_allocation = 1
+attributes         = RW         # read/write
+cycles             = 1
+memory_type        = LDRAM
+sections           = .csa
+hierarchy          = CORE0
+
+
+#
+# Program SPM (SPRAM; PMI; L1)
+#
+[PMI-SRAM]
+type               = memory
+origin             = 0xd4000000
+length             = 0xbc00     # 47K; 1K is reserved for PMI-SYS
+dynamic_allocation = 0
+attributes         = RWXA       # read/execute
+cycles             = 1
+memory_type        = SPRAM
+sections           = .text_spm
+hierarchy          = CORE0
+
+
+#
+# Part of program SPM for system stuff (SPRAM; PMI; L1)
+#
+[PMI-SYS]
+type               = memory
+origin             = 0xd400bc00
+length             = 0x400      # 1K is used for traptable and inttab
+dynamic_allocation = 0
+attributes         = RX         # read/execute
+cycles             = 0
+memory_type        = SPRAM
+sections           = .traptab .inttab
+hierarchy          = CORE0
+
+
+#
+# Memory areas for PCP2 coprocessor
+#
+[PCP-DATA]
+type               = memory
+origin             = 0xf0050000
+length             = 0x2000
+dynamic_allocation = 0
+attributes         = RW
+cycles             = 0
+memory_type        = PERIPHERAL
+sections           = .pcpdata
+hierarchy          = CORE0
+
+
+[PCP-TEXT]
+type               = memory
+origin             = 0xf0060000
+length             = 0x4000
+dynamic_allocation = 0
+attributes         = RX
+cycles             = 0
+memory_type        = PERIPHERAL
+sections           = .pcptext
+hierarchy          = CORE0
+
+
+#
+# ELF Section properties
+#
+[.bss]
+type               = section
+block              = 2
+
+[.data]
+type               = section
+block              = 2
+
+[.data_spm]
+type               = section
+block              = 2
+
+[.rodata]
+type               = section
+block              = 2

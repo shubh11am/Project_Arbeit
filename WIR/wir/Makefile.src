@@ -1,0 +1,99 @@
+include wir/API/Makefile.src
+
+libwir_la_SOURCES      += wir/wir.h \
+                          wir/wiraddressingmodeparameter.cc wir/wiraddressingmodeparameter.h \
+                          wir/wirbasecontainer.cc wir/wirbasecontainer.h \
+                          wir/wirbaseimmediateparameter.cc wir/wirbaseimmediateparameter.h \
+                          wir/wirbaseprocessor.cc wir/wirbaseprocessor.h \
+                          wir/wirbaseregister.cc wir/wirbaseregister.h \
+                          wir/wirbasicblock.cc wir/wirbasicblock.h \
+                          wir/wirbus.cc wir/wirbus.h \
+                          wir/wirbusarbitration.cc wir/wirbusarbitration.h \
+                          wir/wircache.cc wir/wircache.h \
+                          wir/wircompilationunit.cc wir/wircompilationunit.h \
+                          wir/wirconditionfieldparameter.cc wir/wirconditionfieldparameter.h \
+                          wir/wircontainer.h \
+                          wir/wirdata.cc wir/wirdata.h \
+                          wir/wirdatainit.cc wir/wirdatainit.h \
+                          wir/wirfpbusarbitration.cc wir/wirfpbusarbitration.h \
+                          wir/wirfunction.cc wir/wirfunction.h \
+                          wir/wirimmediateparameter.h \
+                          wir/wirinstruction.cc wir/wirinstruction.h \
+                          wir/wirio.cc wir/wirio.h \
+                          wir/wirlabelparameter.cc wir/wirlabelparameter.h \
+                          wir/wirmemoryregion.cc wir/wirmemoryregion.h \
+                          wir/wirmisc.cc wir/wirmisc.h \
+                          wir/wiroperation.cc wir/wiroperation.h \
+                          wir/wiroperationformat.cc wir/wiroperationformat.h \
+                          wir/wirparameter.cc wir/wirparameter.h \
+                          wir/wirpdbusarbitration.cc wir/wirpdbusarbitration.h \
+                          wir/wirphysicalregister.cc wir/wirphysicalregister.h \
+                          wir/wirprocessor.h \
+                          wir/wirregister.h \
+                          wir/wirregisterparameter.cc wir/wirregisterparameter.h \
+                          wir/wirregistry.cc wir/wirregistry.h \
+                          wir/wirroundrobinbusarbitration.cc wir/wirroundrobinbusarbitration.h \
+                          wir/wirsection.cc wir/wirsection.h \
+                          wir/wirsignedimmediateparameter.h \
+                          wir/wirstats.cc wir/wirstats.h \
+                          wir/wirstringparameter.cc wir/wirstringparameter.h \
+                          wir/wirsymbol.cc wir/wirsymbol.h \
+                          wir/wirsystem.cc wir/wirsystem.h \
+                          wir/wirsystemcomponent.cc wir/wirsystemcomponent.h \
+                          wir/wirsystemconfig.cc wir/wirsystemconfig.h \
+                          wir/wirtaskmanager.cc wir/wirtaskmanager.h \
+                          wir/wirtdmabusarbitration.cc wir/wirtdmabusarbitration.h \
+                          wir/wirtypes.cc wir/wirtypes.h \
+                          wir/wirunsignedimmediateparameter.h \
+                          wir/wirvirtualregister.cc wir/wirvirtualregister.h
+
+if !WITH_RESTRICTED_INSTALL
+  wirincludedir		= ${includedir}/wir
+
+  wirinclude_HEADERS	= wir/wir.h \
+                          wir/wiraddressingmodeparameter.h \
+                          wir/wirbasecontainer.h \
+                          wir/wirbaseimmediateparameter.h \
+                          wir/wirbaseprocessor.h \
+                          wir/wirbaseregister.h \
+                          wir/wirbasicblock.h \
+                          wir/wirbus.h \
+                          wir/wirbusarbitration.h \
+                          wir/wircache.h \
+                          wir/wircompilationunit.h \
+                          wir/wirconditionfieldparameter.h \
+                          wir/wircontainer.h \
+                          wir/wirdata.h \
+                          wir/wirdatainit.h \
+                          wir/wirfpbusarbitration.h \
+                          wir/wirfunction.h \
+                          wir/wirimmediateparameter.h \
+                          wir/wirinstruction.h \
+                          wir/wirio.h \
+                          wir/wirlabelparameter.h \
+                          wir/wirmemoryregion.h \
+                          wir/wirmisc.h \
+                          wir/wiroperation.h \
+                          wir/wiroperationformat.h \
+                          wir/wirparameter.h \
+                          wir/wirpdbusarbitration.h \
+                          wir/wirphysicalregister.h \
+                          wir/wirprocessor.h \
+                          wir/wirregister.h \
+                          wir/wirregisterparameter.h \
+                          wir/wirregistry.h \
+                          wir/wirroundrobinbusarbitration.h \
+                          wir/wirsection.h \
+                          wir/wirsignedimmediateparameter.h \
+                          wir/wirstats.h \
+                          wir/wirstringparameter.h \
+                          wir/wirsymbol.h \
+                          wir/wirsystem.h \
+                          wir/wirsystemcomponent.h \
+                          wir/wirsystemconfig.h \
+                          wir/wirtaskmanager.h \
+                          wir/wirtdmabusarbitration.h \
+                          wir/wirtypes.h \
+                          wir/wirunsignedimmediateparameter.h \
+                          wir/wirvirtualregister.h
+endif
